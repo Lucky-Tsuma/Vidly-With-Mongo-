@@ -24,11 +24,7 @@ const Genre = mongose.model("Genre", mongose.Schema({
     }
 }))
 
-router.get("/", (_req, res) => {
-    res.send("You are on vidly homepage.")
-})
-
-router.get("/genres", async (_req, res) => { 
+router.get("/", async (_req, res) => { 
     try {
         res.status(200).send(await Genre.find())  
     } catch (error) {
@@ -36,7 +32,7 @@ router.get("/genres", async (_req, res) => {
     }
 })
 
-router.post("/genres", async (req, res) => { 
+router.post("/", async (req, res) => { 
     const { error } = validateGenre(req.body)
     if (error) { return res.status(400).send(error.details[0].message) }
     
@@ -48,7 +44,7 @@ router.post("/genres", async (req, res) => {
     }
 })
 
-router.put("/genres/:id", async (req, res) => { 
+router.put("/:id", async (req, res) => { 
     const { error } = validateGenre(req.body)
     if (error) { return res.status(400).send(error.details[0].message) }
 
@@ -64,7 +60,7 @@ router.put("/genres/:id", async (req, res) => {
     }
 })
 
-router.delete("/genres/:id", async (req, res) => { 
+router.delete("/:id", async (req, res) => { 
     try {
         const genre = await Genre.findById(req.params.id)
 

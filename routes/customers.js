@@ -1,38 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Joi = require("joi")
-const mongose = require("mongoose")
-
-    // INPUT VALIDATION WITH JOI
-const schema = Joi.object({
-    isGold: Joi.boolean(),
-    phone: Joi.string().min(10).max(13).required(),
-    name: Joi.string().min(5).required()
-})
-
-const validateCustomer = (customer) => {
-    return schema.validate(customer)
-}
-
-// MONGO_DB
-
-// We created a schema and compiled it into a model at the same time to make clean code
-const Customer = mongose.model("Customer", mongose.Schema({
-    name: {
-        type: String,
-        required: true,
-        min: 5,
-        max: 50
-    },
-    isGold: {
-        type: Boolean,
-        default: false
-    }, 
-    phone: {
-        type: Number,
-        required: true
-    }
-}))
+const {validate, Customer} = require('../models/customer')
 
 router.get("/", async (_req, res) => { 
     try {
@@ -43,7 +11,7 @@ router.get("/", async (_req, res) => {
 })
 
 router.post("/", async (req, res) => { 
-    const { error } = validateCustomer(req.body)
+    const { error } = validate(req.body)
     if (error) { return res.status(400).send(error.details[0].message) }
     
     try {
@@ -59,7 +27,7 @@ router.post("/", async (req, res) => {
 })
 
 router.put("/:id", async (req, res) => { 
-    const { error } = validateCustomer(req.body)
+    const { error } = validate(req.body)
     if (error) { return res.status(400).send(error.details[0].message) }
 
     try {

@@ -1,28 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Joi = require("joi")
-const mongose = require("mongoose")
-
-    // INPUT VALIDATION WITH JOI
-const schema = Joi.object({
-    name: Joi.string().min(5).required()
-})
-
-const validateGenre = (genre) => {
-    return schema.validate(genre)
-}
-
-// MONGO_DB
-
-// We created a schema and compiled it into a model at the same time to make clean code
-const Genre = mongose.model("Genre", mongose.Schema({
-    name: {
-        type: String,
-        required: true,
-        min: 5,
-        max: 50
-    }
-}))
+const { Genre, validate } = require('../models/genre')
 
 router.get("/", async (_req, res) => { 
     try {
@@ -33,7 +11,7 @@ router.get("/", async (_req, res) => {
 })
 
 router.post("/", async (req, res) => { 
-    const { error } = validateGenre(req.body)
+    const { error } = validate(req.body)
     if (error) { return res.status(400).send(error.details[0].message) }
     
     try {
@@ -45,7 +23,7 @@ router.post("/", async (req, res) => {
 })
 
 router.put("/:id", async (req, res) => { 
-    const { error } = validateGenre(req.body)
+    const { error } = validate(req.body)
     if (error) { return res.status(400).send(error.details[0].message) }
 
     try {

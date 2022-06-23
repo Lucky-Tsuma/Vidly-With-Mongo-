@@ -9,18 +9,19 @@ const validate = (genre) => {
     return schema.validate(genre)
 }
 
-// We created a schema and compiled it into a model at the same time to make clean code
-const Genre = mongose.model("Genre", mongose.Schema({
+const genreSchema = mongose.Schema({
     name: {
         type: String,
         required: true,
         min: 5,
         max: 50
     }
-}))
+})
+const Genre = mongose.model("Genre", genreSchema)
 
 module.exports = {
     validate,
+    genreSchema,
     Genre
 }
     

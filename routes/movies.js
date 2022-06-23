@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
                 name: genre.name
             },
             numberInStock: req.body.numberInStock,
-            dailyRentalRates: req.body.dailyRentalRates
+            dailyRentalRate: req.body.dailyRentalRate
         })
         res.status(200).send(await movie.save())
     } catch (err) {
@@ -52,7 +52,7 @@ router.put("/:id", async (req, res) => {
             name: genre.name
         }
         movie.numberInStock = req.body.numberInStock
-        movie.dailyRentalRates = req.body.dailyRentalRates
+        movie.dailyRentalRate = req.body.dailyRentalRate
         res.status(200).send(await movie.save())
     } catch (err) {
         res.status(500).send("Error updating movie " + err)

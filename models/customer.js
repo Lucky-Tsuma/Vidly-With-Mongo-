@@ -1,5 +1,5 @@
 const Joi = require("joi")
-const mongose = require("mongoose")
+const mongoose = require("mongoose")
 
 const schema = Joi.object({
     isGold: Joi.boolean(),
@@ -11,7 +11,7 @@ const validate = (customer) => {
     return schema.validate(customer)
 }
 
-const Customer = mongose.model("Customer", mongose.Schema({
+const Customer = mongoose.model("Customer", mongoose.Schema({
     name: {
         type: String,
         required: true,

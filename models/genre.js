@@ -9,7 +9,7 @@ const validate = (genre) => {
     return schema.validate(genre)
 }
 
-const genreSchema = mongoose.Schema({
+const genreSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,

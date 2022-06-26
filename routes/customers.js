@@ -12,7 +12,7 @@ router.get("/", async (_req, res) => {
 
 router.post("/", async (req, res) => { 
     const { error } = validate(req.body)
-    if (error) { return res.status(400).send(error.details[0].message) }
+    if (error) return res.status(400).send(error.details[0].message) 
     
     try {
         const customer = new Customer({
@@ -28,12 +28,12 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => { 
     const { error } = validate(req.body)
-    if (error) { return res.status(400).send(error.details[0].message) }
+    if (error) return res.status(400).send(error.details[0].message) 
 
     try {
         const customer = await Customer.findById(req.params.id)
 
-        if(!customer) { return res.status(200).send("Sorry! No such customer was found")}
+        if(!customer) return res.status(200).send("Sorry! No such customer was found")
 
         customer.name = req.body.name
         customer.phone = req.body.phone
@@ -48,7 +48,7 @@ router.delete("/:id", async (req, res) => {
     try {
         const customer = await Customer.findById(req.params.id)
 
-        if(!customer) { return res.status(200).send("Sorry! No such customer was found")}
+        if(!customer) return res.status(200).send("Sorry! No such customer was found")
         res.status(200).send(await  Customer.findByIdAndRemove(req.params.id))
     } catch (error) {
         res.status(500).send("Error deleting customer " + error)

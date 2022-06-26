@@ -1,13 +1,13 @@
 const Joi = require("joi")
-Joi.objectId = require('joi-objectid')(Joi)
+Joi.objectId = require("joi-objectid")(Joi)
 const express = require("express")
 const app = express()
 const genres = require("./routes/genres")
 const customers = require("./routes/customers")
 const movies = require("./routes/movies")
 const rentals = require("./routes/rental")
-const register = require('./routes/users')
-const auth = require('./routes/auth')
+const register = require("./routes/users")
+const auth = require("./routes/auth")
 const mongoose = require("mongoose")
 const config = require("config")
 require("dotenv").config()
@@ -27,7 +27,7 @@ mongoose.connect("mongodb://localhost/vidly")
 
 const port = process.env.VIDLY_PORT || 3000 
 
-if (!config.get('jwtPrivateKey')) {
+if (!config.get("jwtPrivateKey")) {
     console.log("FATAL ERROR: jwtPrivateKey not defined")
     process.exit(1)
     

@@ -1,8 +1,8 @@
-const auth = require('../middleware/auth')
+const auth = require("../middleware/auth")
 const express = require("express")
 const router = express.Router()
-const { Movie, validate } = require('../models/movies')
-const { Genre } = require('../models/genre')
+const { Movie, validate } = require("../models/movies")
+const { Genre } = require("../models/genre")
 
 router.get("/", async (_req, res) => { 
     try {

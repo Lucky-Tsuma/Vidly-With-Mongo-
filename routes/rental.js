@@ -1,15 +1,15 @@
 const express = require("express")
 const router = express.Router()
-const { Rental, validate } = require('../models/rental')
-const { Customer } = require('../models/customer')
-const { Movie } = require('../models/movies')
-const Fawn = require('fawn')
+const { Rental, validate } = require("../models/rental")
+const { Customer } = require("../models/customer")
+const { Movie } = require("../models/movies")
+const Fawn = require("fawn")
 
-Fawn.init('mongodb://localhost/vidly')
+Fawn.init("mongodb://localhost/vidly")
 
 router.get("/", async (_req, res) => { 
     try {
-        res.status(200).send(await Rental.find().sort('-dateOut'))  
+        res.status(200).send(await Rental.find().sort("-dateOut"))  
     } catch (error) {
         res.status(500).send("Error getting rental data" + error)
     }
@@ -43,8 +43,8 @@ router.post("/", async (req, res) => {
 
         // We use the fawn library to simulate transcations on mongodb
         new Fawn.Task()
-            .save('rentals', rental)
-            .update('movies', { _id: movie._id }, {
+            .save("rentals", rental)
+            .update("movies", { _id: movie._id }, {
                 $inc: { numberInStock: -1 }
             })
             .run()

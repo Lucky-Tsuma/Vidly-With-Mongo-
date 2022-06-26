@@ -1,8 +1,8 @@
-const auth = require('../middleware/auth')
-const admin = require('../middleware/admin')
+const auth = require("../middleware/auth")
+const admin = require("../middleware/admin")
 const express = require("express")
 const router = express.Router()
-const { Genre, validate } = require('../models/genre')
+const { Genre, validate } = require("../models/genre")
 
 router.get("/", async (_req, res) => { 
     try {

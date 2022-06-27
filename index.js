@@ -1,3 +1,5 @@
+require('express-async-errors')
+require("dotenv").config()
 const Joi = require("joi")
 Joi.objectId = require("joi-objectid")(Joi)
 const express = require("express")
@@ -10,7 +12,11 @@ const register = require("./routes/users")
 const auth = require("./routes/auth")
 const mongoose = require("mongoose")
 const config = require("config")
-require("dotenv").config()
+const error = require('./middleware/error')
+
+mongoose.connect("mongodb://localhost/vidly")
+    .then(() => console.log("Connected to database..."))
+    .catch(err => console.error("Error connecting to database: ", err))
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
@@ -20,10 +26,8 @@ app.use("/vidly.com/api/movies", movies)
 app.use("/vidly.com/api/rentals", rentals)
 app.use("/vidly.com/api/users", register)
 app.use("/vidly.com/api/auth", auth)
-
-mongoose.connect("mongodb://localhost/vidly")
-    .then(() => console.log("Connected to database..."))
-    .catch(err => console.error("Error connecting to database: ", err))
+// express middleware fxn, imported after all middleware
+app.use(error)
 
 const port = process.env.VIDLY_PORT || 3000 
 

@@ -3,7 +3,7 @@ const router = express.Router()
 const {validate, Customer} = require("../models/customer")
 
 router.get("/", async (_req, res) => { 
-    res.status(200).send(await Customer.fid())  
+    res.status(200).send(await Customer.find())  
 })
 
 router.post("/", async (req, res) => { 

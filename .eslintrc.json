@@ -8,7 +8,7 @@
     "parserOptions": {
         "ecmaVersion": "latest"
     },
-    "ignorePatterns": ["*.json", "README.md", "readme.txt", "*.pdf"],
+    "ignorePatterns": ["*.json", "README.md", "readme.txt", "*.pdf", "logfile.log"],
     "rules": {
         "semi": ["error", "never"],
         "quotes": ["error", "double"]

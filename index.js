@@ -19,6 +19,8 @@ app.use((_req, res) => {
     res.status(404).send("Page not found!")
 })
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     winston.info(`Vidly listening on port ${port}...`)
 })
+
+module.exports = server

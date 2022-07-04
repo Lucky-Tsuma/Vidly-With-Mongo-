@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose",
+    "test": "jest --watchAll --verbose --detectOpenHandles",
     "eslint": "npx eslint \"./**\" --fix"
   },
   "keywords": [],
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "eslint": "^8.17.0",
-    "jest": "^28.1.2"
+    "jest": "^28.1.2",
+    "supertest": "^6.2.4"
   }
 }

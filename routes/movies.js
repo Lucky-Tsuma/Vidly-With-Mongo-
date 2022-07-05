@@ -35,8 +35,8 @@ router.put("/:id", auth, async (req, res) => {
     const movie = await Movie.findById(req.params.id)
     const genre = await Genre.findById(req.body.genreId)
 
-    if(!movie) return res.status(200).send("Sorry! No such movie was found")
-    if(!genre) return res.status(200).send("Invalid genre")
+    if(!movie) return res.status(404).send("Sorry! No such movie was found")
+    if(!genre) return res.status(404).send("Invalid genre")
 
     movie.title = req.body.title
     movie.genre = {
@@ -51,7 +51,7 @@ router.put("/:id", auth, async (req, res) => {
 router.delete("/:id", auth, async (req, res) => { 
     const movie = await Movie.findById(req.params.id)
 
-    if(!movie) return res.status(200).send("Sorry! No such movie was found")
+    if(!movie) return res.status(404).send("Sorry! No such movie was found")
     res.status(200).send(await  Movie.findByIdAndRemove(req.params.id))
 })
 

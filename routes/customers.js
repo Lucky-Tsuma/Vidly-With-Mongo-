@@ -23,7 +23,7 @@ router.put("/:id", async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message) 
 
     const customer = await Customer.findById(req.params.id)
-    if(!customer) return res.status(200).send("Sorry! No such customer was found")
+    if(!customer) return res.status(404).send("Sorry! No such customer was found")
 
     customer.name = req.body.name
     customer.phone = req.body.phone
@@ -33,7 +33,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => { 
     const customer = await Customer.findById(req.params.id)
-    if(!customer) return res.status(200).send("Sorry! No such customer was found")
+    if(!customer) return res.status(404).send("Sorry! No such customer was found")
     res.status(200).send(await  Customer.findByIdAndRemove(req.params.id))
 })
 

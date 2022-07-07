@@ -3,7 +3,7 @@ const admin = require("../middleware/admin")
 const express = require("express")
 const router = express.Router()
 const { Genre, validate } = require("../models/genre")
-const validateId = require('../middleware/validateObjectId')
+const validateId = require("../middleware/validateObjectId")
 
 router.get("/", async(_req, res) => { 
     res.status(200).send(await Genre.find())  

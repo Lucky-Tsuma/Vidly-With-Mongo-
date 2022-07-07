@@ -1,5 +1,5 @@
 
-const express = require('express')
+const express = require("express")
 const genres = require("../routes/genres")
 const customers = require("../routes/customers")
 const movies = require("../routes/movies")

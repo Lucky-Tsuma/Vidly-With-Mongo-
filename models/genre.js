@@ -2,7 +2,7 @@ const Joi = require("joi")
 const mongoose = require("mongoose")
 
 const schema = Joi.object({
-    name: Joi.string().min(5).required()
+    name: Joi.string().min(5).max(50).required()
 })
 
 const validate = (genre) => {

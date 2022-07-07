@@ -25,10 +25,21 @@ describe('/api/genres', () => {
            expect(res.body.some(g => g.name === 'genre1')).toBeTruthy()
            expect(res.body.some(g => g.name === 'genre2')).toBeTruthy()
         })
+        
+        describe('GET/:id', () => {
+            it('Should return a genre if a valid id is passed', async () => {
+                const genre = new Genre({ name: 'genre1' })
+                await genre.save()
+                
+                const res = await request(server).get('/vidly.com/api/genres/' + genre._id)
+                expect(res.status).toBe(200)
+                expect(res.body).toHaveProperty('name', genre.name)
+            })
 
-        // it('Should return 404 if genre was not found', () => {
-        //     const res = request(server).get('vidly.com/api/genres/62ac65150dded5f6104362d0')
-        //     expect(res.status).toBe(404)
-        // })
+            it('Should return 404 if invalid id is passed', async () => {
+                const res = await request(server).get('/vidly.com/api/genres/1')
+                expect(res.status).toBe(404)
+            })
+        })
     })
 })

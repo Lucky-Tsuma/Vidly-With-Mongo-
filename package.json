@@ -6,18 +6,24 @@
   "scripts": {
     "test": "jest --watchAll --verbose --detectOpenHandles",
     "test-coverage": "jest --watchAll --verbose --detectOpenHandles --coverage",
-    "eslint": "npx eslint \"./**\" --fix"
+    "eslint": "npx eslint \"./**\" --fix",
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "16.15.0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
     "config": "^3.3.7",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
     "fawn": "^2.1.5",
+    "helmet": "^5.1.0",
     "joi": "^17.6.0",
     "joi-objectid": "^4.0.2",
     "jsonwebtoken": "^8.5.1",

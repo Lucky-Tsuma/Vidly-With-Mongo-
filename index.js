@@ -11,14 +11,6 @@ require("./startup/validation")()
 
 const port = process.env.VIDLY_PORT || 3000 
 
-app.use("/", (_req, res) => {
-    res.send("You are on vidly homepage.")
-})
-
-app.use((_req, res) => {
-    res.status(404).send("Page not found!")
-})
-
 const server = app.listen(port, () => {
     winston.info(`Vidly listening on port ${port}...`)
 })

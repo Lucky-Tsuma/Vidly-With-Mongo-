@@ -11,7 +11,7 @@ const schema = Joi.object({
 })
     .with("password", "confirm_password")
 
-const validate = (user) => {
+const validateUser = (user) => {
     return schema.validate(user)
 }
 
@@ -44,6 +44,6 @@ userSchema.methods.generateAuthToken = function() {
 const User = mongoose.model("User", userSchema)
 
 module.exports = {
-    validate,
+    validateUser,
     User
 }

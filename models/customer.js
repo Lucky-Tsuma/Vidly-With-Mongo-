@@ -7,7 +7,7 @@ const schema = Joi.object({
     name: Joi.string().min(5).required()
 })
 
-const validate = (customer) => {
+const validateCustomer = (customer) => {
     return schema.validate(customer)
 }
 
@@ -29,6 +29,6 @@ const Customer = mongoose.model("Customer", mongoose.Schema({
 }))
 
 module.exports = {
-    validate,
+    validateCustomer,
     Customer
 }

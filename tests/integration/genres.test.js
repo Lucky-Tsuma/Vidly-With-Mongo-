@@ -8,7 +8,7 @@ describe("/vidly.com/api/genres", () => {
 
     afterEach(async () => { 
         // close server after running test suite. To avoid 'port in use' error since each test suite will re-load server.
-        server.close()
+        await server.close()
         // after test suite completes, return db to a clean state. Each test suite should run in a clean state
         await Genre.deleteMany({})
     })

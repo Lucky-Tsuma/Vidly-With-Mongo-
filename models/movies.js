@@ -10,7 +10,7 @@ const schema = Joi.object({
     dailyRentalRate: Joi.number().min(0).required()
 })
 
-const validate = (movie) => {
+const validateMovie = (movie) => {
     return schema.validate(movie)
 }
 
@@ -40,7 +40,7 @@ const Movie = mongoose.model("Movie", mongoose.Schema({
 }))
 
 module.exports = {
-    validate,
+    validateMovie,
     Movie
 }
     

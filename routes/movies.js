@@ -1,18 +1,16 @@
 const auth = require("../middleware/auth")
 const express = require("express")
 const router = express.Router()
-const { Movie, validate } = require("../models/movies")
+const { Movie, validateMovie } = require("../models/movies")
 const { Genre } = require("../models/genre")
 const validateId = require("../middleware/validateObjectId")
+const validate = require('../middleware/validate')
 
 router.get("/", async (_req, res) => { 
     res.status(200).send(await Movie.find())  
 })
 
-router.post("/", auth, async (req, res) => { 
-    const { error } = validate(req.body)
-    if (error) return res.status(400).send(error.details[0].message) 
-    
+router.post("/", [auth, validate(validateMovie)], async (req, res) => { 
     // We only passed the genreId, we use that to update other properties if the genre exists
     const genre = await Genre.findById(req.body.genreId)
     if(!genre) return res.status(400).send("Invalid genre")
@@ -29,10 +27,7 @@ router.post("/", auth, async (req, res) => {
     res.status(200).send(await movie.save())
 })
 
-router.put("/:id", [validateId, auth], async (req, res) => { 
-    const { error } = validate(req.body)
-    if (error) return res.status(400).send(error.details[0].message) 
-
+router.put("/:id", [validateId, validate(validateMovie), auth], async (req, res) => { 
     const movie = await Movie.findById(req.params.id)
     const genre = await Genre.findById(req.body.genreId)
 

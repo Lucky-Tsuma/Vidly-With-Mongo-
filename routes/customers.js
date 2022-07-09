@@ -1,16 +1,14 @@
 const express = require("express")
 const router = express.Router()
-const {validate, Customer} = require("../models/customer")
+const {validateCustomer, Customer} = require("../models/customer")
 const validateId = require("../middleware/validateObjectId")
+const validate = require('../middleware/validate')
 
 router.get("/", async (_req, res) => { 
     res.status(200).send(await Customer.find())  
 })
 
-router.post("/", async (req, res) => { 
-    const { error } = validate(req.body)
-    if (error) return res.status(400).send(error.details[0].message) 
-    
+router.post("/", validate(validateCustomer), async (req, res) => { 
     const customer = new Customer({
         name: req.body.name,
         phone: req.body.phone,
@@ -19,10 +17,7 @@ router.post("/", async (req, res) => {
     res.status(200).send(await customer.save())
 })
 
-router.put("/:id", validateId, async (req, res) => { 
-    const { error } = validate(req.body)
-    if (error) return res.status(400).send(error.details[0].message) 
-
+router.put("/:id", [validateId, validate(validateCustomer)], async (req, res) => { 
     const customer = await Customer.findById(req.params.id)
     if(!customer) return res.status(404).send("Sorry! No such customer was found")
 

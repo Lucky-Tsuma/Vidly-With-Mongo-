@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --detectOpenHandles --coverage",
+    "test": "jest --watchAll --verbose --detectOpenHandles",
+    "test-coverage": "jest --watchAll --verbose --detectOpenHandles --coverage",
     "eslint": "npx eslint \"./**\" --fix"
   },
   "keywords": [],
@@ -21,6 +22,7 @@
     "joi-objectid": "^4.0.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "mongodb": "^4.7.0",
     "mongoose": "^6.4.1",
     "winston": "^3.8.0",

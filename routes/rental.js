@@ -1,9 +1,10 @@
 const express = require("express")
 const router = express.Router()
-const { Rental, validate } = require("../models/rental")
+const { Rental, validateRental } = require("../models/rental")
 const { Customer } = require("../models/customer")
 const { Movie } = require("../models/movies")
 const Fawn = require("fawn")
+const validate = require('../middleware/validate')
 
 Fawn.init("mongodb://localhost/vidly")
 
@@ -11,10 +12,7 @@ router.get("/", async (_req, res) => {
     res.status(200).send(await Rental.find().sort("-dateOut"))  
 })
 
-router.post("/", async (req, res) => { 
-    const { error } = validate(req.body)
-    if (error) return res.status(400).send(error.details[0].message) 
-    
+router.post("/", validate(validateRental), async (req, res) => { 
     const customer = await Customer.findById(req.body.customerId)
     if(!customer) return res.status(404).send("No such customer was found")
 

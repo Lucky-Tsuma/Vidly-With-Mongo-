@@ -3,7 +3,7 @@ let server
 const { Genre } = require("../../models/genre")
 const { User } = require("../../models/user")
 
-describe("/vidly.com/api/genres", () => {
+describe("/api/genres", () => {
     beforeEach(() => { server = require("../../index") })
 
     afterEach(async () => { 
@@ -20,7 +20,7 @@ describe("/vidly.com/api/genres", () => {
                 { name: "genre1" },
                 { name: "genre2" },
             ])
-           const res = await request(server).get("/vidly.com/api/genres")
+           const res = await request(server).get("/api/genres")
            expect(res.status).toBe(200)
            expect(res.body.length).toBe(2)
            expect(res.body.some(g => g.name === "genre1")).toBeTruthy()
@@ -32,13 +32,13 @@ describe("/vidly.com/api/genres", () => {
                 const genre = new Genre({ name: "genre1" })
                 await genre.save()
                 
-                const res = await request(server).get("/vidly.com/api/genres/" + genre._id)
+                const res = await request(server).get("/api/genres/" + genre._id)
                 expect(res.status).toBe(200)
                 expect(res.body).toHaveProperty("name", genre.name)
             })
 
             it("Should return 404 if invalid id is passed", async () => {
-                const res = await request(server).get("/vidly.com/api/genres/1")
+                const res = await request(server).get("/api/genres/1")
                 expect(res.status).toBe(404)
             })
         })
@@ -54,7 +54,7 @@ describe("/vidly.com/api/genres", () => {
             })
 
             const exec = async () => {
-                return await request(server).post("/vidly.com/api/genres/").set({ "x-auth-token": token }).send({ name })
+                return await request(server).post("/api/genres/").set({ "x-auth-token": token }).send({ name })
             }
 
             it("Should return 401 if client is not logged in", async () => {

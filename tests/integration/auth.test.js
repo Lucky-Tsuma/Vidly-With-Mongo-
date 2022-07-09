@@ -15,7 +15,7 @@ describe("Auth middleware", () => {
     })
 
     const exec = () => {
-        return request(server).post("/vidly.com/api/genres/").set({ "x-auth-token": token }).send({ name: "genre1" })
+        return request(server).post("/api/genres/").set({ "x-auth-token": token }).send({ name: "genre1" })
     }
 
     it("Should return 401 if no token is provided", async () => {

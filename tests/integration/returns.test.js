@@ -5,7 +5,7 @@ const request = require("supertest")
 const moment = require("moment")
 const { Movie } = require("../../models/movies")
 
-describe("/vidly.com/api/returns", () => {
+describe("/api/returns", () => {
     let server
     let customerId
     let movieId
@@ -50,7 +50,7 @@ describe("/vidly.com/api/returns", () => {
     })
 
     const exec = () => {
-        return request(server).post("/vidly.com/api/returns").set({ "x-auth-token": token }).send({ customerId, movieId })
+        return request(server).post("/api/returns").set({ "x-auth-token": token }).send({ customerId, movieId })
     }
 
     it("Should return 401 if client is not logged in", async () => {

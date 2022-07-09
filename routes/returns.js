@@ -3,7 +3,7 @@ const router = express.Router()
 const { Rental, validateRental } = require("../models/rental")
 const { Movie } = require("../models/movies")
 const auth = require("../middleware/auth")
-const validate = require('../middleware/validate')
+const validate = require("../middleware/validate")
 
 router.post("/", [auth, validate(validateRental)], async(req, res) => { 
     const rental = await Rental.lookup(req.body.customerId, req.body.movieId)

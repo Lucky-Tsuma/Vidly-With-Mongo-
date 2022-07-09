@@ -1,7 +1,7 @@
 const Joi = require("joi")
 Joi.objectId = require("joi-objectid")(Joi)
 const mongoose = require("mongoose")
-const moment = require('moment')
+const moment = require("moment")
 
 const rentalSchema = mongoose.Schema({
     customer: {
@@ -67,7 +67,7 @@ rentalSchema.statics.lookup = function(customerId, movieId) {
 rentalSchema.methods.return = function () {
     this.dateReturned = new Date()
     
-    const rentalDays = moment().diff(this.dateOut, 'days')
+    const rentalDays = moment().diff(this.dateOut, "days")
     this.rentalFee = rentalDays * this.movie.dailyRentalRate
 }
 const Rental = mongoose.model("Rental", rentalSchema)

@@ -3,7 +3,7 @@ const Joi = require("joi")
 const express = require("express")
 const router = express.Router()
 const { User } = require("../models/user")
-const validate = require('../middleware/validate')
+const validate = require("../middleware/validate")
 
 router.post("/", validate(validateAuth), async (req, res) => { 
     let user = await User.findOne({email: req.body.email})

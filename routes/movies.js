@@ -4,7 +4,7 @@ const router = express.Router()
 const { Movie, validateMovie } = require("../models/movies")
 const { Genre } = require("../models/genre")
 const validateId = require("../middleware/validateObjectId")
-const validate = require('../middleware/validate')
+const validate = require("../middleware/validate")
 
 router.get("/", async (_req, res) => { 
     res.status(200).send(await Movie.find())  

@@ -4,7 +4,7 @@ const express = require("express")
 const router = express.Router()
 const auth = require("../middleware/auth")
 const { validateUser, User } = require("../models/user")
-const validate = require('../middleware/validate')
+const validate = require("../middleware/validate")
 
 router.get("/", async (_req, res) => { 
     res.status(200).send(await User.find())  

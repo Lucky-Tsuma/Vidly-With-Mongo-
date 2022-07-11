@@ -5,8 +5,9 @@ const { Customer } = require("../models/customer")
 const { Movie } = require("../models/movies")
 const Fawn = require("fawn")
 const validate = require("../middleware/validate")
+const config = require("config")
 
-Fawn.init("mongodb://localhost/vidly")
+Fawn.init(config.get("db"))
 
 router.get("/", async (_req, res) => { 
     res.status(200).send(await Rental.find().sort("-dateOut"))  
